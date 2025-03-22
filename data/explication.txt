@@ -1,0 +1,5 @@
+1 9        1 : id of the vertex   9 : lenght
+2 2
+3 3 2      2 : predecessors
+4 5 1
+5 2 1 4
