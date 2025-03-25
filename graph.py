@@ -117,3 +117,12 @@ def detect_cycle(matrix):
     else:
         print("✅ No cycle detected.")
         return False
+
+def negative_weights(matrix):
+    print("\n* Checking for negative weights")
+    for i in range(len(matrix)):
+        for j in range(len(matrix)):
+            if matrix[i][j] != '*' and matrix[i][j] < 0:
+                print("⚠️  Negative weight found at", (i, j))
+                return True
+    return False
