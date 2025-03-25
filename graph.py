@@ -18,7 +18,9 @@ Functions:
 
 # scheduling_project/graph.py #3
 
+from time import sleep
 from parser import Task
+from collections import deque
 
 def build_graph_matrix(tasks: dict):
     task_ids = sorted(tasks.keys())
@@ -104,6 +106,7 @@ def detect_cycle(matrix):
 
         # Remove vertices and update in-degrees
         for v in entry_points:
+            sleep(0.5)
             remaining.remove(v)
             for j in range(n):
                 if matrix[v][j] != '*':
@@ -126,3 +129,47 @@ def negative_weights(matrix):
                 print("⚠️  Negative weight found at", (i, j))
                 return True
     return False
+
+def compute_ranks(matrix, total_nodes, index_to_id):
+
+    # Initialize ranks and queue
+    ranks = {i: None for i in range(total_nodes)}
+    ranks[0] = 0  # Start node rank is 0
+    queue = deque([0])  # Start BFS from vertex 0
+
+    print("\n=== Computing Ranks (Shortest Path in Edges from Vertex 0) ===")
+    print("Method: Breadth-First Search (BFS)\n")
+
+    # BFS to compute ranks
+    while queue:
+        current = queue.popleft()
+        current_rank = ranks[current]
+        print(f"Processing vertex {current} (Rank = {current_rank}):")
+
+        # Check all possible neighbors
+        print("Checking neighbors...")
+        for j in range(total_nodes):
+            if matrix[current][j] != '*':  # There is an edge from current to j
+                if ranks[j] is None:  # If rank not yet set
+                    sleep(0.5)
+                    ranks[j] = current_rank + 1
+                    queue.append(j)
+                    print(f"  Set rank of vertex {j} to {ranks[j]} (from vertex {current})")
+                else:
+                    print(f"  Vertex {j} already has rank {ranks[j]}, no update needed")
+
+        print("")  # Blank line for readability
+
+    # Display final ranks
+    print("=== Final Ranks ===")
+    for i in range(total_nodes):
+        sleep(0.3)
+        if i == 0:
+            label = "Start"
+        elif i == total_nodes - 1:
+            label = "End"
+        else:
+            label = f"Task {index_to_id[i]}"
+        print(f"Vertex {i} ({label}): Rank = {ranks[i]}")
+
+    return ranks
