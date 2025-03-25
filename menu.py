@@ -23,9 +23,13 @@ def main_menu():
     if not is_cycle and not is_negative:
         print("No cycle detected and there are no negative weights, this is a scheduling graph.")
         sleep(0.5)
-        
+
 
 
 def display_menu():
-    print("This is the main menu, please enter the number of the constraint table you want to work with (1-17): ")
-    return int(input(""))
+    print("This is the main menu, please enter the number of the constraint table you want to work with (1-14): ")
+    constraint_nb = int(input(""))
+    if constraint_nb < 1 or constraint_nb > 14:
+        print("Please enter a number between 1 and 14.")
+        display_menu()
+    return constraint_nb
