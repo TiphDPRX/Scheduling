@@ -38,3 +38,14 @@ def compute_latest_dates(matrix, total_nodes, earliest):
         print(f"Task {i}: Latest start = {latest[i]}")
 
     return latest
+
+def compute_total_float(total_nodes, earliest, latest):
+    float = {i: 0 for i in range(total_nodes)}
+    for i in range (total_nodes):
+        float[i] = latest[i]-earliest[i]
+
+    print("\n=== Total Floats ===")
+    for i in range(total_nodes):
+        print(f"Task {i}: float = {float[i]}")
+
+

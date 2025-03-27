@@ -26,7 +26,8 @@ def main_menu():
         sleep(0.5)
         compute_ranks(matrix, total_nodes, index_to_id)
         earliest = compute_earliest_dates(matrix, total_nodes)
-        compute_latest_dates(matrix, total_nodes, earliest)
+        latest = compute_latest_dates(matrix, total_nodes, earliest)
+        compute_total_float(total_nodes, earliest, latest)
     else:
         print("This is not a scheduling graph.")
         sleep(0.5)
