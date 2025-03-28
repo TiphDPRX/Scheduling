@@ -1,6 +1,5 @@
 from parser import parse_constraint_file
-from graph import *
-from time import *
+
 from scheduler import *
 
 def main_menu():
@@ -24,9 +23,9 @@ def main_menu():
     if not is_cycle and not is_negative:
         print("No cycle detected and there are no negative weights, this is a scheduling graph.")
         sleep(0.5)
-        compute_ranks(matrix, total_nodes, index_to_id)
+        ranks = compute_ranks(matrix, total_nodes, index_to_id)
         earliest = compute_earliest_dates(matrix, total_nodes)
-        latest = compute_latest_dates(matrix, total_nodes, earliest)
+        latest = compute_latest_dates(matrix, total_nodes, earliest, ranks)
         compute_total_float(total_nodes, earliest, latest)
     else:
         print("This is not a scheduling graph.")
